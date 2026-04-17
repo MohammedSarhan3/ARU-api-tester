@@ -1949,7 +1949,7 @@ export const ENDPOINTS = {
       isProtected: true,
       example: {
         body: JSON.stringify({
-          ownerId: 'admin-owner-uuid-here',
+          ownerId: 'aeaa3407-01df-4cba-897e-457adf180cb4',
           universityName_en: 'Arabian Gulf University',
           universityName_ar: 'جامعة الخليج العربي',
           email: 'info@agu.edu.sd',

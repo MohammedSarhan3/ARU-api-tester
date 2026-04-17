@@ -6,7 +6,7 @@ import useStore from '../store'
 const Sidebar = ({ onShowHistory }) => {
   const [expandedCategories, setExpandedCategories] = useState(['Admin Auth'])
   const [showEnvironment, setShowEnvironment] = useState(false)
-  const { user, environment, setEnvironment, clearTokens, setSelectedEndpoint, setCurrentMethod, setCurrentUrl, setBody, addToFavorites, removeFromFavorites, favorites, selectedEndpoint } = useStore()
+  const { user, environment, environmentUrls, setEnvironment, clearTokens, setSelectedEndpoint, setCurrentMethod, setCurrentUrl, setBody, addToFavorites, removeFromFavorites, favorites, selectedEndpoint } = useStore()
 
   const filteredEndpoints = useMemo(() => {
     return ENDPOINTS
@@ -15,7 +15,7 @@ const Sidebar = ({ onShowHistory }) => {
   const handleSelectEndpoint = (endpoint) => {
     setSelectedEndpoint(endpoint)
     setCurrentMethod(endpoint.method)
-    setCurrentUrl(`http://localhost:3000/api/v1.0${endpoint.path}`)
+    setCurrentUrl(`${environmentUrls[environment]}${endpoint.path}`)
     setBody('') // Clear body when switching endpoints
   }
 

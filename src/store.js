@@ -26,6 +26,10 @@ const useStore = create((set) => ({
   activeTab: 'body',
   selectedEndpoint: null,
   environment: 'development',
+  environmentUrls: JSON.parse(localStorage.getItem('environmentUrls') || JSON.stringify({
+    development: 'http://localhost:3000/api/v1.0',
+    production: 'https://api.example.com/api/v1.0'
+  })),
 
   // History & Favorites
   requestHistory: JSON.parse(localStorage.getItem('requestHistory') || '[]'),
@@ -63,6 +67,13 @@ const useStore = create((set) => ({
   setActiveTab: (tab) => set({ activeTab: tab }),
   setSelectedEndpoint: (endpoint) => set({ selectedEndpoint: endpoint }),
   setEnvironment: (env) => set({ environment: env }),
+  setEnvironmentUrl: (env, url) => {
+    set((state) => {
+      const newUrls = { ...state.environmentUrls, [env]: url }
+      localStorage.setItem('environmentUrls', JSON.stringify(newUrls))
+      return { environmentUrls: newUrls }
+    })
+  },
   
   addToHistory: (request) => {
     set((state) => {
