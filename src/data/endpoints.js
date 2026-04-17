@@ -1906,25 +1906,30 @@ export const ENDPOINTS = {
   ],
   'University': [
     {
-      id: 'university-list',
-      name: 'Get All',
+      id: 'university-get-all',
+      name: 'Get All Universities',
       method: 'GET',
-      path: '/universities',
-      description: 'Get all universities',
+      path: '/university',
+      description: 'Get all universities in the system - Public access',
       isProtected: false,
-      params: ['page', 'limit', 'search'],
       example: {
-        body: ''
+        body: '',
+        bodyExplain: {
+          note: 'No parameters required. Returns list of all active universities.'
+        }
       }
     },
     {
-      id: 'university-info',
-      name: 'Get Info',
+      id: 'university-get-by-id',
+      name: 'Get University by ID',
       method: 'GET',
-      path: '/university',
-      description: 'Get university information (Returns 404 if university is deleted)',
+      path: '/university/:universityId',
+      description: 'Get single university by ID - Public access (Returns 404 if university is deleted)',
       isProtected: false,
       example: {
+        pathParams: {
+          universityId: 'uni-001-abc-def-ghi'
+        },
         body: ''
       }
     },
@@ -1932,24 +1937,19 @@ export const ENDPOINTS = {
       id: 'university-create',
       name: 'Create',
       method: 'POST',
-      path: '/universities',
-      description: 'Create a new university',
+      path: '/university',
+      description: 'Create a new university (University Admin/Owner only)',
       isProtected: true,
       example: {
-        headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0MmFiMGJhLWViYTktNDg3Ny1iMmJmLTFiOTY2M2I0MjJlNiIsImVtYWlsIjoiam9mZmhuLmRvZUBleGFtcGxlLmNvbSIsInJvbGUiOiJNT0RFUkFUT1IiLCJvd25lcklkIjoiODFlYzc1MmItZDkzZi00ODhhLTg1ODItZWVjYjc0NmFiNTVhIiwidHlwZSI6ImFkbWluIiwiaWF0IjoxNzc2MzQ5NTM0LCJleHAiOjE3NzYzNTA0MzR9.n2z6sOxfXU6e7SfIl1ggHe2AaLbLHovvvxCn12zYFwI'
-        },
         body: JSON.stringify({
-          universityName_en: 'Ahmed Raza University',
-          universityName_ar: 'جامعة أحمد رزا',
-          email: 'info@university.com',
-          description: 'Leading educational institution'
+          universityName_en: 'Arabian Gulf University',
+          universityName_ar: 'جامعة الخليج العربي',
+          ownerId: 'owner-123'
         }, null, 2),
         bodyExplain: {
-          universityName_en: 'University name in English (required)',
-          universityName_ar: 'University name in Arabic (required)',
-          email: 'University email address (required)',
-          description: 'University description (required)'
+          universityName_en: 'University name in English (required, max 255 chars)',
+          universityName_ar: 'University name in Arabic (required, max 255 chars)',
+          ownerId: 'Owner/Admin ID managing university (required, UUID)'
         }
       }
     },
@@ -1957,22 +1957,20 @@ export const ENDPOINTS = {
       id: 'university-update',
       name: 'Update',
       method: 'PUT',
-      path: '/university',
-      description: 'Update university information (Returns 410 if university is deleted)',
+      path: '/university/:universityId',
+      description: 'Update university information (Owner/Admin only - Returns 410 if university is deleted)',
       isProtected: true,
       example: {
-        headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0MmFiMGJhLWViYTktNDg3Ny1iMmJmLTFiOTY2M2I0MjJlNiIsImVtYWlsIjoiam9mZmhuLmRvZUBleGFtcGxlLmNvbSIsInJvbGUiOiJNT0RFUkFUT1IiLCJvd25lcklkIjoiODFlYzc1MmItZDkzZi00ODhhLTg1ODItZWVjYjc0NmFiNTVhIiwidHlwZSI6ImFkbWluIiwiaWF0IjoxNzc2MzQ5NTM0LCJleHAiOjE3NzYzNTA0MzR9.n2z6sOxfXU6e7SfIl1ggHe2AaLbLHovvvxCn12zYFwI'
+        pathParams: {
+          universityId: 'uni-001-abc-def-ghi'
         },
         body: JSON.stringify({
-          name: 'Ahmed Raza University',
-          description: 'Leading educational institution',
-          email: 'info@university.com'
+          universityName_en: 'Updated University Name',
+          universityName_ar: 'اسم الجامعة المحدث'
         }, null, 2),
         bodyExplain: {
-          name: 'Updated university name (optional)',
-          description: 'Updated university description (optional)',
-          email: 'Updated university email (optional)'
+          universityName_en: 'University name in English (optional)',
+          universityName_ar: 'University name in Arabic (optional)'
         }
       }
     },
@@ -1980,12 +1978,12 @@ export const ENDPOINTS = {
       id: 'university-delete',
       name: 'Delete',
       method: 'DELETE',
-      path: '/university',
-      description: 'Delete university data (Returns 400 if already deleted, Returns 200 on success)',
+      path: '/university/:universityId',
+      description: 'Delete university (soft delete - Owner/Admin only - Returns 400 if already deleted)',
       isProtected: true,
       example: {
-        headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQ0MmFiMGJhLWViYTktNDg3Ny1iMmJmLTFiOTY2M2I0MjJlNiIsImVtYWlsIjoiam9mZmhuLmRvZUBleGFtcGxlLmNvbSIsInJvbGUiOiJNT0RFUkFUT1IiLCJvd25lcklkIjoiODFlYzc1MmItZDkzZi00ODhhLTg1ODItZWVjYjc0NmFiNTVhIiwidHlwZSI6ImFkbWluIiwiaWF0IjoxNzc2MzQ5NTM0LCJleHAiOjE3NzYzNTA0MzR9.n2z6sOxfXU6e7SfIl1ggHe2AaLbLHovvvxCn12zYFwI'
+        pathParams: {
+          universityId: 'uni-001-abc-def-ghi'
         },
         body: ''
       }
