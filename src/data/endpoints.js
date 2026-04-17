@@ -1327,11 +1327,52 @@ export const ENDPOINTS = {
   ],
   'Events': [
     {
+      id: 'event-get-all',
+      name: 'Get All Events',
+      method: 'GET',
+      path: '/events',
+      description: 'Get all events (paginated) - Public access. Optional filters: page, limit, ownerId, ownerType, facultyId, administrationId, centerId, unitId, is_active',
+      isProtected: false,
+      params: ['page', 'limit', 'ownerId', 'ownerType', 'facultyId', 'administrationId', 'centerId', 'unitId', 'is_active'],
+      example: {
+        params: {
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          ownerId: 'Filter by owner ID (optional)',
+          ownerType: 'Filter by owner type: FACULTY, ADMINISTRATION, UNIVERSITY, CENTER, UNIT (optional)',
+          facultyId: 'Filter by faculty ID (optional)',
+          administrationId: 'Filter by administration ID (optional)',
+          centerId: 'Filter by center ID (optional)',
+          unitId: 'Filter by unit ID (optional)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'event-get-by-id',
+      name: 'Get Event by ID',
+      method: 'GET',
+      path: '/events/:eventId',
+      description: 'Get single event by ID - Public access (Returns 404 if event is deleted)',
+      isProtected: false,
+      example: {
+        pathParams: {
+          eventId: 'event-uuid-here'
+        },
+        body: ''
+      }
+    },
+    {
       id: 'event-by-owner',
       name: 'Get by Owner ID',
       method: 'GET',
       path: '/events',
-      description: 'Get all events for a specific owner',
+      description: 'Get all events for a specific owner (alternative endpoint)',
       isProtected: false,
       params: ['ownerId', 'page', 'limit', 'is_active'],
       example: {
@@ -1347,20 +1388,6 @@ export const ENDPOINTS = {
           limit: 'Records per page (optional, default: 10)',
           is_active: 'Filter by active status: true or false (optional)'
         }
-      }
-    },
-    {
-      id: 'event-detail',
-      name: 'Get Details',
-      method: 'GET',
-      path: '/events/:eventId',
-      description: 'Get event details (Returns 404 if event is deleted)',
-      isProtected: false,
-      example: {
-        pathParams: {
-          eventId: 'event-uuid-here'
-        },
-        body: ''
       }
     },
     {
@@ -1473,11 +1500,52 @@ export const ENDPOINTS = {
   ],
   'News': [
     {
+      id: 'news-get-all',
+      name: 'Get All News',
+      method: 'GET',
+      path: '/news',
+      description: 'Get all news articles (paginated) - Public access. Optional filters: page, limit, ownerId, ownerType, facultyId, administrationId, centerId, unitId, is_active',
+      isProtected: false,
+      params: ['page', 'limit', 'ownerId', 'ownerType', 'facultyId', 'administrationId', 'centerId', 'unitId', 'is_active'],
+      example: {
+        params: {
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          ownerId: 'Filter by owner ID (optional)',
+          ownerType: 'Filter by owner type: FACULTY, ADMINISTRATION, UNIVERSITY, CENTER, UNIT (optional)',
+          facultyId: 'Filter by faculty ID (optional)',
+          administrationId: 'Filter by administration ID (optional)',
+          centerId: 'Filter by center ID (optional)',
+          unitId: 'Filter by unit ID (optional)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'news-get-by-id',
+      name: 'Get News by ID',
+      method: 'GET',
+      path: '/news/:newsId',
+      description: 'Get single news article by ID - Public access (Returns 404 if news is deleted)',
+      isProtected: false,
+      example: {
+        pathParams: {
+          newsId: 'news-uuid-here'
+        },
+        body: ''
+      }
+    },
+    {
       id: 'news-by-owner',
       name: 'Get by Owner ID',
       method: 'GET',
       path: '/news',
-      description: 'Get all news articles for a specific owner',
+      description: 'Get all news articles for a specific owner (alternative endpoint)',
       isProtected: false,
       params: ['ownerId', 'page', 'limit', 'is_active'],
       example: {
@@ -1493,20 +1561,6 @@ export const ENDPOINTS = {
           limit: 'Records per page (optional, default: 10)',
           is_active: 'Filter by active status: true or false (optional)'
         }
-      }
-    },
-    {
-      id: 'news-detail',
-      name: 'Get Details',
-      method: 'GET',
-      path: '/news/:newsId',
-      description: 'Get news details (Returns 404 if news is deleted)',
-      isProtected: false,
-      example: {
-        pathParams: {
-          newsId: 'news-uuid-here'
-        },
-        body: ''
       }
     },
     {
