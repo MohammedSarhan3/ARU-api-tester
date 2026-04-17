@@ -1331,24 +1331,25 @@ export const ENDPOINTS = {
       name: 'Get All Events',
       method: 'GET',
       path: '/events',
-      description: 'Get all events (paginated) - Public access. Optional filters: page, limit, ownerId, ownerType, facultyId, administrationId, centerId, unitId, is_active',
+      description: 'Get all events (paginated) - Public access. REQUIRES at least one filter: ownerType, ownerId, facultyId, administrationId, centerId, or unitId',
       isProtected: false,
-      params: ['page', 'limit', 'ownerId', 'ownerType', 'facultyId', 'administrationId', 'centerId', 'unitId', 'is_active'],
+      params: ['ownerType', 'ownerId', 'facultyId', 'administrationId', 'centerId', 'unitId', 'page', 'limit', 'is_active'],
       example: {
         params: {
+          ownerType: 'ADMINISTRATION',
           page: '1',
           limit: '10'
         },
         body: '',
         bodyExplain: {
+          ownerType: 'Filter by owner type (REQUIRED): FACULTY, ADMINISTRATION, UNIVERSITY, CENTER, UNIT',
+          ownerId: 'Filter by owner ID (alternative to ownerType)',
+          facultyId: 'Filter by faculty ID',
+          administrationId: 'Filter by administration ID',
+          centerId: 'Filter by center ID',
+          unitId: 'Filter by unit ID',
           page: 'Page number (optional, default: 1)',
           limit: 'Records per page (optional, default: 10)',
-          ownerId: 'Filter by owner ID (optional)',
-          ownerType: 'Filter by owner type: FACULTY, ADMINISTRATION, UNIVERSITY, CENTER, UNIT (optional)',
-          facultyId: 'Filter by faculty ID (optional)',
-          administrationId: 'Filter by administration ID (optional)',
-          centerId: 'Filter by center ID (optional)',
-          unitId: 'Filter by unit ID (optional)',
           is_active: 'Filter by active status: true or false (optional)'
         }
       }
@@ -1489,14 +1490,16 @@ export const ENDPOINTS = {
       path: '/events',
       description: 'Get all events for the university - Public access',
       isProtected: false,
-      params: ['page', 'limit', 'is_active'],
+      params: ['ownerType', 'page', 'limit', 'is_active'],
       example: {
         params: {
+          ownerType: 'UNIVERSITY',
           page: '1',
           limit: '10'
         },
         body: '',
         bodyExplain: {
+          ownerType: 'Filter by owner type: UNIVERSITY (required)',
           page: 'Page number (optional, default: 1)',
           limit: 'Records per page (optional, default: 10)',
           is_active: 'Filter by active status: true or false (optional)'
@@ -1617,24 +1620,25 @@ export const ENDPOINTS = {
       name: 'Get All News',
       method: 'GET',
       path: '/news',
-      description: 'Get all news articles (paginated) - Public access. Optional filters: page, limit, ownerId, ownerType, facultyId, administrationId, centerId, unitId, is_active',
+      description: 'Get all news articles (paginated) - Public access. REQUIRES at least one filter: ownerType, ownerId, facultyId, administrationId, centerId, or unitId',
       isProtected: false,
-      params: ['page', 'limit', 'ownerId', 'ownerType', 'facultyId', 'administrationId', 'centerId', 'unitId', 'is_active'],
+      params: ['ownerType', 'ownerId', 'facultyId', 'administrationId', 'centerId', 'unitId', 'page', 'limit', 'is_active'],
       example: {
         params: {
+          ownerType: 'ADMINISTRATION',
           page: '1',
           limit: '10'
         },
         body: '',
         bodyExplain: {
+          ownerType: 'Filter by owner type (REQUIRED): FACULTY, ADMINISTRATION, UNIVERSITY, CENTER, UNIT',
+          ownerId: 'Filter by owner ID (alternative to ownerType)',
+          facultyId: 'Filter by faculty ID',
+          administrationId: 'Filter by administration ID',
+          centerId: 'Filter by center ID',
+          unitId: 'Filter by unit ID',
           page: 'Page number (optional, default: 1)',
           limit: 'Records per page (optional, default: 10)',
-          ownerId: 'Filter by owner ID (optional)',
-          ownerType: 'Filter by owner type: FACULTY, ADMINISTRATION, UNIVERSITY, CENTER, UNIT (optional)',
-          facultyId: 'Filter by faculty ID (optional)',
-          administrationId: 'Filter by administration ID (optional)',
-          centerId: 'Filter by center ID (optional)',
-          unitId: 'Filter by unit ID (optional)',
           is_active: 'Filter by active status: true or false (optional)'
         }
       }
@@ -1775,14 +1779,16 @@ export const ENDPOINTS = {
       path: '/news',
       description: 'Get all news articles for the university - Public access',
       isProtected: false,
-      params: ['page', 'limit', 'is_active'],
+      params: ['ownerType', 'page', 'limit', 'is_active'],
       example: {
         params: {
+          ownerType: 'UNIVERSITY',
           page: '1',
           limit: '10'
         },
         body: '',
         bodyExplain: {
+          ownerType: 'Filter by owner type: UNIVERSITY (required)',
           page: 'Page number (optional, default: 1)',
           limit: 'Records per page (optional, default: 10)',
           is_active: 'Filter by active status: true or false (optional)'
