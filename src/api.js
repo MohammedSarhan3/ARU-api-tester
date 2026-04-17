@@ -154,8 +154,31 @@ export const login = async (email, password, isAdmin = true) => {
 
   if (token) {
     console.log('✅ Setting tokens in store...')
+    
+    // Extract user data from response
+    let userData = { email, role: isAdmin ? 'admin' : 'doctor' }
+    
+    // Try to extract more user data from various response formats
+    if (response.data?.user) {
+      userData = { ...userData, ...response.data.user }
+    } else if (response.data?.data?.user) {
+      userData = { ...userData, ...response.data.data.user }
+    } else if (response.data?.result?.user) {
+      userData = { ...userData, ...response.data.result.user }
+    } else if (response.data?.admin) {
+      userData = { ...userData, ...response.data.admin }
+    } else if (response.data?.doctor) {
+      userData = { ...userData, ...response.data.doctor }
+    } else if (response.data?.data?.admin) {
+      userData = { ...userData, ...response.data.data.admin }
+    } else if (response.data?.data?.doctor) {
+      userData = { ...userData, ...response.data.data.doctor }
+    }
+    
+    console.log('👤 User data extracted:', userData)
+    
     useStore.getState().setTokens(token, refreshToken || '')
-    useStore.getState().setUser({ email, role: isAdmin ? 'admin' : 'doctor' })
+    useStore.getState().setUser(userData)
     
     // Verify tokens were set
     const storeState = useStore.getState()
