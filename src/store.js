@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 const useStore = create((set) => ({
   // Auth state
-  user: null,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
   accessToken: localStorage.getItem('accessToken') || null,
   refreshToken: localStorage.getItem('refreshToken') || null,
   isLoggedIn: !!localStorage.getItem('accessToken'),
@@ -32,7 +32,12 @@ const useStore = create((set) => ({
   favorites: JSON.parse(localStorage.getItem('favorites') || '[]'),
 
   // Actions
-  setUser: (user) => set({ user }),
+  setUser: (user) => {
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user))
+    }
+    set({ user })
+  },
   setTokens: (accessToken, refreshToken) => {
     localStorage.setItem('accessToken', accessToken)
     localStorage.setItem('refreshToken', refreshToken)
@@ -41,6 +46,7 @@ const useStore = create((set) => ({
   clearTokens: () => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('refreshToken')
+    localStorage.removeItem('user')
     set({ accessToken: null, refreshToken: null, isLoggedIn: false, user: null })
   },
   
