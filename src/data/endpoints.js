@@ -1912,10 +1912,17 @@ export const ENDPOINTS = {
       path: '/university',
       description: 'Get all universities in the system - Public access',
       isProtected: false,
+      params: ['page', 'limit'],
       example: {
+        params: {
+          page: '1',
+          limit: '10'
+        },
         body: '',
         bodyExplain: {
-          note: 'No parameters required. Returns list of all active universities.'
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          note: 'No authentication required. Returns all active universities.'
         }
       }
     },
@@ -1944,12 +1951,35 @@ export const ENDPOINTS = {
         body: JSON.stringify({
           universityName_en: 'Arabian Gulf University',
           universityName_ar: 'جامعة الخليج العربي',
-          ownerId: 'owner-123'
+          email: 'info@agu.edu.sd',
+          logo: 'https://example.com/logo.png',
+          vision_en: 'To be a leading research university',
+          vision_ar: 'أن تكون جامعة رائدة في البحث العلمي',
+          mission_en: 'To advance knowledge and education',
+          mission_ar: 'تعزيز المعرفة والتعليم',
+          uni_phone_number: '+249123456789',
+          president_firstName_en: 'Ahmed',
+          president_firstName_ar: 'أحمد',
+          president_word_en: 'Welcome to our university',
+          president_word_ar: 'مرحبا بكم في جامعتنا'
         }, null, 2),
         bodyExplain: {
-          universityName_en: 'University name in English (required, max 255 chars)',
-          universityName_ar: 'University name in Arabic (required, max 255 chars)',
-          ownerId: 'Owner/Admin ID managing university (required, UUID)'
+          universityName_en: 'University name in English (required, 3-200 chars)',
+          universityName_ar: 'University name in Arabic (required, 3-200 chars)',
+          email: 'Official university email (required, valid email)',
+          logo: 'Logo URL (required)',
+          vision_en: 'University vision in English (optional)',
+          vision_ar: 'University vision in Arabic (optional)',
+          mission_en: 'University mission in English (optional)',
+          mission_ar: 'University mission in Arabic (optional)',
+          uni_phone_number: 'University phone number (optional)',
+          president_firstName_en: "President's first name in English (optional)",
+          president_firstName_ar: "President's first name in Arabic (optional)",
+          president_word_en: "President's greeting/word in English (optional)",
+          president_word_ar: "President's greeting/word in Arabic (optional)",
+          president_Image: "President's photo URL (optional)",
+          president_About_en: 'About president in English (optional)',
+          president_About_ar: 'About president in Arabic (optional)'
         }
       }
     },
@@ -1966,11 +1996,36 @@ export const ENDPOINTS = {
         },
         body: JSON.stringify({
           universityName_en: 'Updated University Name',
-          universityName_ar: 'اسم الجامعة المحدث'
+          universityName_ar: 'اسم الجامعة المحدث',
+          email: 'newemail@agu.edu.sd',
+          logo: 'https://example.com/new-logo.png',
+          vision_en: 'Updated vision statement',
+          vision_ar: 'بيان الرؤية المحدث',
+          mission_en: 'Updated mission statement',
+          mission_ar: 'بيان المهمة المحدث',
+          uni_phone_number: '+249987654321',
+          president_firstName_en: 'Mohamed',
+          president_firstName_ar: 'محمد',
+          president_word_en: 'Updated welcome message',
+          president_word_ar: 'رسالة الترحيب المحدثة'
         }, null, 2),
         bodyExplain: {
           universityName_en: 'University name in English (optional)',
-          universityName_ar: 'University name in Arabic (optional)'
+          universityName_ar: 'University name in Arabic (optional)',
+          email: 'University email address (optional)',
+          logo: 'Logo URL (optional)',
+          vision_en: 'University vision in English (optional)',
+          vision_ar: 'University vision in Arabic (optional)',
+          mission_en: 'University mission in English (optional)',
+          mission_ar: 'University mission in Arabic (optional)',
+          uni_phone_number: 'University phone number (optional)',
+          president_firstName_en: "President's first name in English (optional)",
+          president_firstName_ar: "President's first name in Arabic (optional)",
+          president_word_en: "President's greeting in English (optional)",
+          president_word_ar: "President's greeting in Arabic (optional)",
+          president_Image: "President's photo URL (optional)",
+          president_About_en: 'About president in English (optional)',
+          president_About_ar: 'About president in Arabic (optional)'
         }
       }
     },
