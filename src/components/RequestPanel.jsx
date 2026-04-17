@@ -21,6 +21,8 @@ const RequestPanel = () => {
     body,
     isLoading,
     selectedEndpoint,
+    environment,
+    environmentUrls,
     refreshToken,
     accessToken,
     setCurrentMethod,
@@ -36,6 +38,13 @@ const RequestPanel = () => {
     setPathParams({})
     setLoadFeedback('')
   }, [selectedEndpoint])
+
+  // Update URL when environment changes
+  useEffect(() => {
+    if (selectedEndpoint) {
+      setCurrentUrl(`${environmentUrls[environment]}${selectedEndpoint.path}`)
+    }
+  }, [environment, environmentUrls, selectedEndpoint, setCurrentUrl])
 
   const handleAddHeader = () => {
     if (headerInput.trim()) {

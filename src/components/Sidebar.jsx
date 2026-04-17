@@ -46,7 +46,7 @@ const Sidebar = ({ onShowHistory }) => {
         id: endpoint.id,
         name: endpoint.name,
         method: endpoint.method,
-        url: `http://localhost:3000/api/v1.0${endpoint.path}`,
+        url: `${environmentUrls[environment]}${endpoint.path}`,
         body: '',
         headers: {},
         params: {},
