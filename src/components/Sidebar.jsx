@@ -1,11 +1,13 @@
 import React, { useState, useMemo } from 'react'
 import { FiStar, FiLogOut, FiClock } from 'react-icons/fi'
 import { ENDPOINTS, getMethodColor } from '../data/endpoints'
+import UserDetailsModal from './UserDetailsModal'
 import useStore from '../store'
 
 const Sidebar = ({ onShowHistory }) => {
   const [expandedCategories, setExpandedCategories] = useState(['Admin Auth'])
   const [showEnvironment, setShowEnvironment] = useState(false)
+  const [showUserModal, setShowUserModal] = useState(false)
   const [editingEnv, setEditingEnv] = useState(null)
   const [editUrl, setEditUrl] = useState('')
   const { user, environment, environmentUrls, setEnvironmentUrl, setEnvironment, clearTokens, setSelectedEndpoint, setCurrentMethod, setCurrentUrl, setBody, addToFavorites, removeFromFavorites, favorites, selectedEndpoint } = useStore()
@@ -197,7 +199,12 @@ const Sidebar = ({ onShowHistory }) => {
       {/* User Info */}
       <div className="px-4 py-3 bg-blue-50 border-b border-gray-200">
         <p className="text-xs text-gray-600">Logged in as:</p>
-        <p className="text-sm font-semibold text-gray-800">{user?.email}</p>
+        <button
+          onClick={() => setShowUserModal(true)}
+          className="text-sm font-semibold text-blue-600 hover:text-blue-800 hover:underline transition text-left"
+        >
+          {user?.email}
+        </button>
         <button
           onClick={handleLogout}
           className="mt-2 w-full flex items-center justify-center gap-2 px-3 py-2 text-sm bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition"
@@ -267,6 +274,13 @@ const Sidebar = ({ onShowHistory }) => {
       <div className="p-3 border-t border-gray-200 text-xs text-gray-500 text-center">
         <p>ARU API Tester v1.0</p>
       </div>
+
+      {/* User Details Modal */}
+      <UserDetailsModal
+        user={user}
+        isOpen={showUserModal}
+        onClose={() => setShowUserModal(false)}
+      />
     </div>
   )
 }
