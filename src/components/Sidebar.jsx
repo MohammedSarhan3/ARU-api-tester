@@ -6,7 +6,9 @@ import useStore from '../store'
 const Sidebar = ({ onShowHistory }) => {
   const [expandedCategories, setExpandedCategories] = useState(['Admin Auth'])
   const [showEnvironment, setShowEnvironment] = useState(false)
-  const { user, environment, environmentUrls, setEnvironment, clearTokens, setSelectedEndpoint, setCurrentMethod, setCurrentUrl, setBody, addToFavorites, removeFromFavorites, favorites, selectedEndpoint } = useStore()
+  const [editingEnv, setEditingEnv] = useState(null)
+  const [editUrl, setEditUrl] = useState('')
+  const { user, environment, environmentUrls, setEnvironmentUrl, setEnvironment, clearTokens, setSelectedEndpoint, setCurrentMethod, setCurrentUrl, setBody, addToFavorites, removeFromFavorites, favorites, selectedEndpoint } = useStore()
 
   const filteredEndpoints = useMemo(() => {
     return ENDPOINTS
@@ -56,6 +58,18 @@ const Sidebar = ({ onShowHistory }) => {
     clearTokens()
   }
 
+  const handleEdit = (envValue) => {
+    setEditingEnv(envValue)
+    setEditUrl(environmentUrls[envValue])
+  }
+
+  const handleSave = () => {
+    if (editUrl.trim()) {
+      setEnvironmentUrl(editingEnv, editUrl)
+    }
+    setEditingEnv(null)
+  }
+
   return (
     <div className="w-64 bg-white shadow-sm border-r border-gray-200 flex flex-col overflow-hidden">
       {/* Header */}
@@ -81,27 +95,100 @@ const Sidebar = ({ onShowHistory }) => {
           </button>
           
           {showEnvironment && (
-            <div className="mt-2 space-y-2 p-2 bg-gray-50 rounded-lg border border-gray-200">
-              <button
-                onClick={() => setEnvironment('development')}
-                className={`w-full px-3 py-2 rounded-lg text-sm text-left transition ${
-                  environment === 'development'
-                    ? 'bg-blue-500 text-white font-semibold'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Development
-              </button>
-              <button
-                onClick={() => setEnvironment('production')}
-                className={`w-full px-3 py-2 rounded-lg text-sm text-left transition ${
-                  environment === 'production'
-                    ? 'bg-red-500 text-white font-semibold'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Production
-              </button>
+            <div className="mt-2 space-y-3 p-2 bg-gray-50 rounded-lg border border-gray-200 max-h-80 overflow-y-auto">
+              {/* Development Environment */}
+              <div className={`rounded-lg border p-2 ${environment === 'development' ? 'bg-blue-50 border-blue-200' : 'bg-white border-gray-200'}`}>
+                <button
+                  onClick={() => setEnvironment('development')}
+                  className={`w-full px-2 py-1 rounded text-sm text-left font-semibold transition ${
+                    environment === 'development'
+                      ? 'bg-blue-500 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Development
+                </button>
+                <p className="text-xs font-mono mt-1 break-all text-gray-600 px-2">{environmentUrls.development}</p>
+                {editingEnv === 'development' ? (
+                  <div className="mt-1 space-y-1">
+                    <input
+                      type="text"
+                      value={editUrl}
+                      onChange={(e) => setEditUrl(e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded font-mono"
+                      placeholder="Enter base URL"
+                    />
+                    <div className="flex gap-1">
+                      <button
+                        onClick={handleSave}
+                        className="flex-1 px-2 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditingEnv(null)}
+                        className="flex-1 px-2 py-1 text-xs bg-gray-400 text-white rounded hover:bg-gray-500"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => handleEdit('development')}
+                    className="w-full mt-1 px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                  >
+                    Edit URL
+                  </button>
+                )}
+              </div>
+
+              {/* Production Environment */}
+              <div className={`rounded-lg border p-2 ${environment === 'production' ? 'bg-red-50 border-red-200' : 'bg-white border-gray-200'}`}>
+                <button
+                  onClick={() => setEnvironment('production')}
+                  className={`w-full px-2 py-1 rounded text-sm text-left font-semibold transition ${
+                    environment === 'production'
+                      ? 'bg-red-500 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  Production
+                </button>
+                <p className="text-xs font-mono mt-1 break-all text-gray-600 px-2">{environmentUrls.production}</p>
+                {editingEnv === 'production' ? (
+                  <div className="mt-1 space-y-1">
+                    <input
+                      type="text"
+                      value={editUrl}
+                      onChange={(e) => setEditUrl(e.target.value)}
+                      className="w-full px-2 py-1 text-xs border border-gray-300 rounded font-mono"
+                      placeholder="Enter base URL"
+                    />
+                    <div className="flex gap-1">
+                      <button
+                        onClick={handleSave}
+                        className="flex-1 px-2 py-1 text-xs bg-green-500 text-white rounded hover:bg-green-600"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={() => setEditingEnv(null)}
+                        className="flex-1 px-2 py-1 text-xs bg-gray-400 text-white rounded hover:bg-gray-500"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => handleEdit('production')}
+                    className="w-full mt-1 px-2 py-1 text-xs bg-gray-200 text-gray-700 rounded hover:bg-gray-300"
+                  >
+                    Edit URL
+                  </button>
+                )}
+              </div>
             </div>
           )}
         </div>
