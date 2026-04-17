@@ -1945,7 +1945,7 @@ export const ENDPOINTS = {
       name: 'Create',
       method: 'POST',
       path: '/university',
-      description: 'Create a new university (University Admin/Owner only)',
+      description: 'Create a new university (University Admin/Owner only - ownerId automatically set from authenticated user)',
       isProtected: true,
       example: {
         body: JSON.stringify({
@@ -1953,7 +1953,6 @@ export const ENDPOINTS = {
           universityName_ar: 'جامعة الخليج العربي',
           email: 'info@agu.edu.sd',
           logo: 'https://example.com/logo.png',
-          ownerId: 'admin-owner-uuid-here',
           vision_en: 'To be a leading research university',
           vision_ar: 'أن تكون جامعة رائدة في البحث العلمي',
           mission_en: 'To advance knowledge and education',
@@ -1976,7 +1975,6 @@ export const ENDPOINTS = {
           universityName_ar: 'University name in Arabic (required, 3-200 chars)',
           email: 'Official university email (required, valid email)',
           logo: 'Logo URL (required)',
-          ownerId: 'Owner/Admin ID (UUID, required - connects to existing admin user)',
           vision_en: 'University vision in English (optional)',
           vision_ar: 'University vision in Arabic (optional)',
           mission_en: 'University mission in English (optional)',
@@ -1992,7 +1990,8 @@ export const ENDPOINTS = {
           president_word_ar: "President's greeting/word in Arabic (optional)",
           president_Image: "President's photo URL (optional)",
           president_About_en: 'About president in English (optional)',
-          president_About_ar: 'About president in Arabic (optional)'
+          president_About_ar: 'About president in Arabic (optional)',
+          note: 'ownerId is automatically set from the authenticated user token'
         }
       }
     },
@@ -2001,7 +2000,7 @@ export const ENDPOINTS = {
       name: 'Update',
       method: 'PUT',
       path: '/university/:universityId',
-      description: 'Update university information (Owner/Admin only - Returns 410 if university is deleted)',
+      description: 'Update university information (Owner only - ownerId verified from authenticated user)',
       isProtected: true,
       example: {
         pathParams: {
@@ -2012,7 +2011,6 @@ export const ENDPOINTS = {
           universityName_ar: 'اسم الجامعة المحدث',
           email: 'newemail@agu.edu.sd',
           logo: 'https://example.com/new-logo.png',
-          ownerId: 'new-admin-owner-uuid-here',
           vision_en: 'Updated vision statement',
           vision_ar: 'بيان الرؤية المحدث',
           mission_en: 'Updated mission statement',
@@ -2035,7 +2033,6 @@ export const ENDPOINTS = {
           universityName_ar: 'University name in Arabic (optional)',
           email: 'University email address (optional)',
           logo: 'Logo URL (optional)',
-          ownerId: 'Owner/Admin ID (UUID, optional - change university ownership)',
           vision_en: 'University vision in English (optional)',
           vision_ar: 'University vision in Arabic (optional)',
           mission_en: 'University mission in English (optional)',
@@ -2051,7 +2048,8 @@ export const ENDPOINTS = {
           president_word_ar: "President's greeting in Arabic (optional)",
           president_Image: "President's photo URL (optional)",
           president_About_en: 'About president in English (optional)',
-          president_About_ar: 'About president in Arabic (optional)'
+          president_About_ar: 'About president in Arabic (optional)',
+          note: 'Only university owner (authenticated user) can update'
         }
       }
     },
