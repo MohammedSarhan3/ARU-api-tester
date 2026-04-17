@@ -9,7 +9,13 @@ const useStore = create((set) => ({
 
   // Request/Response state
   currentMethod: 'GET',
-  currentUrl: 'http://localhost:3000/api/v1.0',
+  currentUrl: (() => {
+    const urls = JSON.parse(localStorage.getItem('environmentUrls') || JSON.stringify({
+      development: 'http://localhost:3000/api/v1.0',
+      production: 'https://api.example.com/api/v1.0'
+    }))
+    return urls.development
+  })(),
   headers: {},
   body: '',
   params: {},
@@ -66,12 +72,25 @@ const useStore = create((set) => ({
   
   setActiveTab: (tab) => set({ activeTab: tab }),
   setSelectedEndpoint: (endpoint) => set({ selectedEndpoint: endpoint }),
-  setEnvironment: (env) => set({ environment: env }),
+  setEnvironment: (env) => {
+    set((state) => {
+      const newCurrentUrl = state.selectedEndpoint 
+        ? `${state.environmentUrls[env]}${state.selectedEndpoint.path}`
+        : state.environmentUrls[env]
+      return { environment: env, currentUrl: newCurrentUrl }
+    })
+  },
   setEnvironmentUrl: (env, url) => {
     set((state) => {
       const newUrls = { ...state.environmentUrls, [env]: url }
       localStorage.setItem('environmentUrls', JSON.stringify(newUrls))
-      return { environmentUrls: newUrls }
+      // If we just changed the URL for the active environment, update currentUrl
+      const newCurrentUrl = state.environment === env 
+        ? (state.selectedEndpoint 
+          ? `${url}${state.selectedEndpoint.path}`
+          : url)
+        : state.currentUrl
+      return { environmentUrls: newUrls, currentUrl: newCurrentUrl }
     })
   },
   
