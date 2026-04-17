@@ -1391,6 +1391,119 @@ export const ENDPOINTS = {
       }
     },
     {
+      id: 'event-by-faculty',
+      name: 'Get by Faculty',
+      method: 'GET',
+      path: '/events',
+      description: 'Get all events for a specific faculty - Public access',
+      isProtected: false,
+      params: ['facultyId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          facultyId: 'faculty-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          facultyId: 'Faculty ID (required) - Example: ?facultyId=f1234567-89ab-cdef-0123-456789abcdef',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'event-by-administration',
+      name: 'Get by Administration',
+      method: 'GET',
+      path: '/events',
+      description: 'Get all events for a specific administration - Public access',
+      isProtected: false,
+      params: ['administrationId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          administrationId: 'admin-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          administrationId: 'Administration ID (required) - Example: ?administrationId=admin-456',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'event-by-center',
+      name: 'Get by Center',
+      method: 'GET',
+      path: '/events',
+      description: 'Get all events for a specific center - Public access',
+      isProtected: false,
+      params: ['centerId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          centerId: 'center-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          centerId: 'Center ID (required) - Example: ?centerId=c1234567-89ab-cdef-0123-456789abcdef',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'event-by-unit',
+      name: 'Get by Unit',
+      method: 'GET',
+      path: '/events',
+      description: 'Get all events for a specific unit - Public access',
+      isProtected: false,
+      params: ['unitId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          unitId: 'unit-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          unitId: 'Unit ID (required) - Example: ?unitId=unit-321',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'event-by-university',
+      name: 'Get by University',
+      method: 'GET',
+      path: '/events',
+      description: 'Get all events for the university - Public access',
+      isProtected: false,
+      params: ['page', 'limit', 'is_active'],
+      example: {
+        params: {
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
       id: 'event-create',
       name: 'Create Event',
       method: 'POST',
@@ -1557,6 +1670,119 @@ export const ENDPOINTS = {
         body: '',
         bodyExplain: {
           ownerId: 'Owner ID (required) - Admin user ID - Example: ?ownerId=aeaa3407-01df-4cba-897e-457adf180cb4',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'news-by-faculty',
+      name: 'Get by Faculty',
+      method: 'GET',
+      path: '/news',
+      description: 'Get all news articles for a specific faculty - Public access',
+      isProtected: false,
+      params: ['facultyId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          facultyId: 'faculty-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          facultyId: 'Faculty ID (required) - Example: ?facultyId=f1234567-89ab-cdef-0123-456789abcdef',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'news-by-administration',
+      name: 'Get by Administration',
+      method: 'GET',
+      path: '/news',
+      description: 'Get all news articles for a specific administration - Public access',
+      isProtected: false,
+      params: ['administrationId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          administrationId: 'admin-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          administrationId: 'Administration ID (required) - Example: ?administrationId=admin-456',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'news-by-center',
+      name: 'Get by Center',
+      method: 'GET',
+      path: '/news',
+      description: 'Get all news articles for a specific center - Public access',
+      isProtected: false,
+      params: ['centerId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          centerId: 'center-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          centerId: 'Center ID (required) - Example: ?centerId=c1234567-89ab-cdef-0123-456789abcdef',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'news-by-unit',
+      name: 'Get by Unit',
+      method: 'GET',
+      path: '/news',
+      description: 'Get all news articles for a specific unit - Public access',
+      isProtected: false,
+      params: ['unitId', 'page', 'limit', 'is_active'],
+      example: {
+        params: {
+          unitId: 'unit-uuid-here',
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
+          unitId: 'Unit ID (required) - Example: ?unitId=unit-321',
+          page: 'Page number (optional, default: 1)',
+          limit: 'Records per page (optional, default: 10)',
+          is_active: 'Filter by active status: true or false (optional)'
+        }
+      }
+    },
+    {
+      id: 'news-by-university',
+      name: 'Get by University',
+      method: 'GET',
+      path: '/news',
+      description: 'Get all news articles for the university - Public access',
+      isProtected: false,
+      params: ['page', 'limit', 'is_active'],
+      example: {
+        params: {
+          page: '1',
+          limit: '10'
+        },
+        body: '',
+        bodyExplain: {
           page: 'Page number (optional, default: 1)',
           limit: 'Records per page (optional, default: 10)',
           is_active: 'Filter by active status: true or false (optional)'
