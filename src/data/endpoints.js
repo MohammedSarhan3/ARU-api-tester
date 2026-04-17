@@ -1945,10 +1945,11 @@ export const ENDPOINTS = {
       name: 'Create',
       method: 'POST',
       path: '/university',
-      description: 'Create a new university (University Admin/Owner only - ownerId automatically set from authenticated user)',
+      description: 'Create a new university (Protected - Requires ownerId)',
       isProtected: true,
       example: {
         body: JSON.stringify({
+          ownerId: 'admin-owner-uuid-here',
           universityName_en: 'Arabian Gulf University',
           universityName_ar: 'جامعة الخليج العربي',
           email: 'info@agu.edu.sd',
@@ -1971,6 +1972,7 @@ export const ENDPOINTS = {
           president_About_ar: 'د. أحمد قائد أكاديمي بارز'
         }, null, 2),
         bodyExplain: {
+          ownerId: 'Owner/Admin ID (UUID, required - must exist in database)',
           universityName_en: 'University name in English (required, 3-200 chars)',
           universityName_ar: 'University name in Arabic (required, 3-200 chars)',
           email: 'Official university email (required, valid email)',
@@ -1990,8 +1992,7 @@ export const ENDPOINTS = {
           president_word_ar: "President's greeting/word in Arabic (optional)",
           president_Image: "President's photo URL (optional)",
           president_About_en: 'About president in English (optional)',
-          president_About_ar: 'About president in Arabic (optional)',
-          note: 'ownerId is automatically set from the authenticated user token'
+          president_About_ar: 'About president in Arabic (optional)'
         }
       }
     },
@@ -2000,7 +2001,7 @@ export const ENDPOINTS = {
       name: 'Update',
       method: 'PUT',
       path: '/university/:universityId',
-      description: 'Update university information (Owner only - ownerId verified from authenticated user)',
+      description: 'Update university information (Owner/Admin only - Returns 410 if university is deleted)',
       isProtected: true,
       example: {
         pathParams: {
@@ -2048,8 +2049,7 @@ export const ENDPOINTS = {
           president_word_ar: "President's greeting in Arabic (optional)",
           president_Image: "President's photo URL (optional)",
           president_About_en: 'About president in English (optional)',
-          president_About_ar: 'About president in Arabic (optional)',
-          note: 'Only university owner (authenticated user) can update'
+          president_About_ar: 'About president in Arabic (optional)'
         }
       }
     },
