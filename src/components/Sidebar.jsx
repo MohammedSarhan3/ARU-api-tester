@@ -253,6 +253,17 @@ const Sidebar = ({ onShowHistory }) => {
                       }`}>
                         {endpoint.name}
                       </span>
+                      {/* Access Level Badge */}
+                      <span
+                        className={`text-xs px-2 py-0.5 rounded-full font-semibold whitespace-nowrap ${
+                          endpoint.isProtected
+                            ? 'bg-red-100 text-red-700'
+                            : 'bg-green-100 text-green-700'
+                        }`}
+                        title={endpoint.isProtected ? 'Protected - Authentication required' : 'Public - No authentication required'}
+                      >
+                        {endpoint.isProtected ? '🔒' : '🔓'}
+                      </span>
                       <button
                         onClick={(e) => handleToggleFavorite(e, endpoint)}
                         className={`opacity-0 group-hover:opacity-100 transition ${
