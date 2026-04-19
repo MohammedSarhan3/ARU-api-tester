@@ -7,6 +7,7 @@ import useStore from '../store'
 const Sidebar = ({ onShowHistory }) => {
   const [expandedCategories, setExpandedCategories] = useState(['Admin Auth'])
   const [showEnvironment, setShowEnvironment] = useState(false)
+  const [showDocumentation, setShowDocumentation] = useState(false)
   const [showUserModal, setShowUserModal] = useState(false)
   const [editingEnv, setEditingEnv] = useState(null)
   const [editUrl, setEditUrl] = useState('')
@@ -194,6 +195,105 @@ const Sidebar = ({ onShowHistory }) => {
             </div>
           )}
         </div>
+      </div>
+
+      {/* Documentation Section */}
+      <div className="px-4 py-3 border-b border-gray-200">
+        <button
+          onClick={() => setShowDocumentation(!showDocumentation)}
+          className="w-full px-3 py-2 text-left bg-purple-100 hover:bg-purple-200 rounded-lg text-sm font-semibold text-purple-700 transition"
+        >
+          Documentation {showDocumentation ? '▼' : '▶'}
+        </button>
+
+        {showDocumentation && (
+          <div className="mt-2 space-y-2 p-3 bg-purple-50 rounded-lg border border-purple-200 text-xs text-gray-700 max-h-72 overflow-y-auto">
+            <div className="space-y-3">
+              {/* Getting Started */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">🚀 Getting Started</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Log in using your admin or doctor credentials</li>
+                  <li>• Your session will be saved across refreshes</li>
+                  <li>• Click your email to view profile details</li>
+                </ul>
+              </div>
+
+              {/* Environment Setup */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">⚙️ Environment Setup</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Click "Environment ▼" to view dev/prod settings</li>
+                  <li>• Click "Edit URL" to customize API endpoints</li>
+                  <li>• URLs update automatically when changed</li>
+                </ul>
+              </div>
+
+              {/* Using Endpoints */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">📋 Using Endpoints</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Expand categories to see available endpoints</li>
+                  <li>• <span className="bg-green-100 text-green-700 px-1 rounded">🔓</span> = Public (no auth)</li>
+                  <li>• <span className="bg-red-100 text-red-700 px-1 rounded">🔒</span> = Protected (auth required)</li>
+                  <li>• ⭐ = Favorite endpoint (click to toggle)</li>
+                </ul>
+              </div>
+
+              {/* Making Requests */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">📤 Making Requests</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Click an endpoint to select it</li>
+                  <li>• Click "Load Example" to populate data</li>
+                  <li>• Edit Body, Headers, or Params tabs</li>
+                  <li>• Click "Send" to execute the request</li>
+                </ul>
+              </div>
+
+              {/* Request Tabs */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">🔧 Request Tabs</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• <strong>Body:</strong> JSON data (POST, PUT)</li>
+                  <li>• <strong>Headers:</strong> Custom HTTP headers</li>
+                  <li>• <strong>Params:</strong> Query parameters (?key=value)</li>
+                </ul>
+              </div>
+
+              {/* View Response */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">📊 View Response</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Response shown on the right panel</li>
+                  <li>• Status code indicates success/error</li>
+                  <li>• Response time and size displayed</li>
+                  <li>• View headers and body separately</li>
+                </ul>
+              </div>
+
+              {/* History */}
+              <div>
+                <h4 className="font-semibold text-purple-900 mb-1">⏱️ Request History</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Click clock icon to view last 10 requests</li>
+                  <li>• Click any request to load it again</li>
+                  <li>• Useful for replaying requests</li>
+                </ul>
+              </div>
+
+              {/* Tips */}
+              <div className="bg-blue-50 border border-blue-200 rounded p-2 mt-2">
+                <h4 className="font-semibold text-blue-900 mb-1">💡 Pro Tips</h4>
+                <ul className="space-y-1 text-gray-700">
+                  <li>• Use ⭐ to quickly find favorite endpoints</li>
+                  <li>• All data is saved in localStorage</li>
+                  <li>• Change environment URLs without logging out</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* User Info */}
