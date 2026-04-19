@@ -1515,7 +1515,6 @@ export const ENDPOINTS = {
       isProtected: true,
       example: {
         body: JSON.stringify({
-          ownerId: 'aeaa3407-01df-4cba-897e-457adf180cb4',
           title_en: 'Conference 2024',
           title_ar: 'مؤتمر 2024',
           slug: 'conference-2024-tech-summit',
@@ -1536,7 +1535,6 @@ export const ENDPOINTS = {
           ]
         }, null, 2),
         bodyExplain: {
-          ownerId: 'Owner ID (admin user ID, required)',
           title_en: 'Event title in English (required)',
           title_ar: 'Event title in Arabic (required)',
           slug: 'Unique slug for URL (lowercase with hyphens only, required)',
@@ -1549,7 +1547,9 @@ export const ENDPOINTS = {
           eventDate: 'Event date in ISO format (required)',
           startTime: 'Event start time in ISO format (required)',
           endTime: 'Event end time in ISO format (required)',
-          images: 'Array of event image URLs (optional)'
+          images: 'Array of event image URLs (optional)',
+          note1: '✅ ownerId is auto-populated from your authenticated session',
+          note2: '🔧 System admins can override by adding ownerId in the request body'
         }
       }
     },
@@ -1804,7 +1804,6 @@ export const ENDPOINTS = {
       isProtected: true,
       example: {
         body: JSON.stringify({
-          ownerId: 'aeaa3407-01df-4cba-897e-457adf180cb4',
           title_en: 'University News 2024',
           title_ar: 'أخبار الجامعة 2024',
           slug: 'university-news-2024-announcement',
@@ -1821,7 +1820,6 @@ export const ENDPOINTS = {
           ]
         }, null, 2),
         bodyExplain: {
-          ownerId: 'Admin/Owner ID (required)',
           title_en: 'News title in English (required, 3-200 chars)',
           title_ar: 'News title in Arabic (required, 3-200 chars)',
           slug: 'Unique slug for URL (lowercase with hyphens only, required)',
@@ -1831,7 +1829,9 @@ export const ENDPOINTS = {
           publishedAt: 'Publication date in ISO 8601 format (required)',
           summary_en: 'Brief summary in English (optional)',
           summary_ar: 'Brief summary in Arabic (optional)',
-          images: 'Array of image URLs (optional)'
+          images: 'Array of image URLs (optional)',
+          note1: '✅ ownerId is auto-populated from your authenticated session',
+          note2: '🔧 System admins can override by adding ownerId in the request body'
         }
       }
     },
